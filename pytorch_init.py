@@ -1,5 +1,5 @@
-from initialized_model.configuration_phi import PhiConfig
-from initialized_model.modeling_phi import PhiForCausalLM
+from configuration_phi import PhiConfig
+from modeling_phi import PhiForCausalLM
 import numpy as np
 import argparse
 import os
