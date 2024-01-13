@@ -17,7 +17,7 @@ from transformers import PretrainedConfig, PreTrainedModel
 from transformers.activations import ACT2FN
 from transformers.modeling_outputs import CausalLMOutputWithPast
 
-from .configuration_phi import PhiConfig
+from configuration_phi import PhiConfig
 
 try:
     from flash_attn.bert_padding import pad_input, unpad_input
