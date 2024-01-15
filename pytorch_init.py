@@ -53,6 +53,12 @@ if __name__ == "__main__":
         help="The dimension of the smaller model",
     )
     parser.add_argument(
+        "--n-head",
+        type=int,
+        default=None,
+        help="The number of heads to use in the smaller model",
+    )
+    parser.add_argument(
         "--output-path",
         type=str,
         default="initialized_model",
@@ -69,8 +75,9 @@ if __name__ == "__main__":
     print(f"Initializing a transformer from {args.model}")
     model = AutoModelForCausalLM.from_pretrained("microsoft/phi-2", trust_remote_code=True, revision="834565c23f9b28b96ccbeabe614dd906b6db551a")
     config = PhiConfig.from_pretrained("microsoft/phi-2", trust_remote_code=True, revision="834565c23f9b28b96ccbeabe614dd906b6db551a")
-    config.n_layer = args.n_layer if args.n_layer is not None else config.n_layer
+    config.n_layer = args.n_layers if args.n_layers is not None else config.n_layer
     config.n_embd = args.n_embd if args.n_embd is not None else config.n_embd
+    config.n_head = args.n_heads if args.n_heads is not None else config.n_head
     smol = PhiForCausalLM(config)
     nparams = sum(
         x.numel() for x in smol.parameters() if x.requires_grad
